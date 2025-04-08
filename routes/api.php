@@ -3,17 +3,27 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\PaymentController;
+use app\Http\Controllers\ShipmentController;
+use App\Models\Shipment;
+use app\Models\Payment;
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/payments', [PaymentController::class, 'index']);      // Listar todos
+Route::get('/payments/{id}', [PaymentController::class, 'show']);  // Mostrar uno
+Route::post('/payments', [PaymentController::class, 'store']);     // Crear
+Route::put('/payments/{id}', [PaymentController::class, 'update']); // Actualizar
+Route::delete('/payments/{id}', [PaymentController::class, 'destroy']); // Eliminar
+
+
+
+Route::get('/shipment', [ShipmentController::class, 'index']);      // Listar todos
+Route::get('/shipment/{id}', [ShipmentController::class, 'show']);  // Mostrar uno
+Route::post('/shipment', [ShipmentController::class, 'store']);     // Crear
+Route::put('/shipment/{id}', [ShipmentController::class, 'update']); // Actualizar
+Route::delete('/shipment/{id}', [ShipmentController::class, 'destroy']); // Eliminar
+
+
+
+
+Route::apiResource('payments', PaymentController::class);
+

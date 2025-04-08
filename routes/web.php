@@ -1,16 +1,20 @@
 <?php
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\MensajeController;
+use App\Http\Controllers\ShipmentController;
+use App\Models\Payment;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('inicio');
+Route::get('/mensaje', function () {
+    return view('mensaje');
 });
 
-Route::get('/usuario',[UserController::class,'usuario'])->name('usuario');
+
+Route::post('/mensaje', [Payment::class, 'index'])->name('mensaje.enviar');
+
+Route::get('/kakaroto', [ShipmentController::class, 'kakaroto'])->name('kakaroto');
